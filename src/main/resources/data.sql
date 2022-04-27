@@ -1,5 +1,5 @@
 -- Insert Drones
-INSERT INTO DRONE (id, serial_number,model,weight_limit,battery_capacity,state) VALUES (1, 'SE1234','Lightweight',500,50,'IDLE');
+INSERT INTO DRONE (id, serial_number,model,weight_limit,battery_capacity,state) VALUES (1, 'SE1234','Lightweight',500,50,'LOADING');
 INSERT INTO DRONE (id, serial_number,model,weight_limit,battery_capacity,state) VALUES (2, 'SE3244','Lightweight',300,20,'LOADING');
 
 -- Insert Medications

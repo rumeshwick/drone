@@ -1,7 +1,6 @@
 package com.rusoft.drone.modules.drone;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,14 +50,14 @@ public class DroneController {
 	@GetMapping(value = "available")
 	public ResponseEntity<?> getAvailableDrones() {
 
-		List<DroneState> states = new ArrayList<DroneState>() {
-            {
-                add(DroneState.IDLE);
-                add(DroneState.LOADING);
-            }
-        };
+		// List<DroneState> states = new ArrayList<DroneState>() {
+        //     {
+        //         add(DroneState.IDLE);
+        //         add(DroneState.LOADING);
+        //     }
+        // };
 
-		List<Drone> drones = droneRepository.findAllByStateInAndBatteryCapacityGreaterThanEqual(states,new BigDecimal(25));
+		List<Drone> drones = droneRepository.findAllByStateAndBatteryCapacityGreaterThanEqual(DroneState.LOADING,new BigDecimal(25));
 
 		return ResponseEntity.ok(drones);
 	}
@@ -89,13 +88,24 @@ public class DroneController {
 
 		Optional<Drone> droneResponse = droneRepository.findBySerialNumber(serialNumber);
 
-		if(droneResponse.isPresent()){
-			medication.setDrone(droneResponse.get());
-			medicationRepository.save(medication);
-			return ResponseEntity.ok(medication);
+		if(droneResponse.isEmpty()){
+			return ResponseEntity.badRequest().body("Drone not found");
 		}
 		
-		return ResponseEntity.badRequest().body("Drone not found");
+		Drone drone = droneResponse.get();
+
+		if(!drone.getState().equals(DroneState.LOADING)){
+			return ResponseEntity.badRequest().body("Drone is not in loading state");
+		}
+
+		if(drone.getBatteryCapacity().compareTo(new BigDecimal("25")) < 0){
+			return ResponseEntity.badRequest().body("Drone battery level is less than 25");
+		}
+
+		medication.setDrone(drone);
+		medicationRepository.save(medication);
+		return ResponseEntity.ok(medication);
+		
 	}
 
 }

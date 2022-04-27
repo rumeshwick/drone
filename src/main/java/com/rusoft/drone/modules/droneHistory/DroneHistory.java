@@ -1,6 +1,7 @@
-package com.rusoft.drone.modules.medication;
+package com.rusoft.drone.modules.droneHistory;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rusoft.drone.modules.drone.Drone;
@@ -20,26 +22,22 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "medication")
-public class Medication {
-
+@Table(name = "drone_history")
+public class DroneHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Pattern(regexp="^[a-zA-Z0-9_-]+$",message="Invalid Name")  
-    private String name;
-
-    @Pattern(regexp="^[A-Z0-9_]+$",message="Invalid Code")  
-    private String code;
-
-    @Column(name="weight")
-    private BigDecimal weight;
-
-    private String image;
-
     @ManyToOne
     @JsonIgnore
     private Drone drone;
+
+    @Column(name="battery_capacity")
+    @DecimalMax(value = "100")
+    @DecimalMin(value = "0")
+    private BigDecimal batteryCapacity;
+
+	private Date date;
+
 
 }
