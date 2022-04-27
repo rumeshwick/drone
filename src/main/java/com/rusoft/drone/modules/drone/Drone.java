@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 
 import com.rusoft.drone.modules.drone.enums.DroneModel;
 import com.rusoft.drone.modules.drone.enums.DroneState;
@@ -23,7 +25,7 @@ import lombok.Setter;
 @Table(name = "drone")
 public class Drone {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name="serial_number",length = 100)
@@ -32,10 +34,14 @@ public class Drone {
     @Enumerated(EnumType.STRING)
 	private DroneModel model;
 
-    @Column(name="weight_imit")
+    @Column(name="weight_limit")
+    @DecimalMax(value = "500",message = "Weight limit should not be greater than 500")
+    @DecimalMin(value = "0")
     private BigDecimal weightLimit;
 
     @Column(name="battery_capacity")
+    @DecimalMax(value = "100")
+    @DecimalMin(value = "0")
     private BigDecimal batteryCapacity;
 
     @Enumerated(EnumType.STRING)

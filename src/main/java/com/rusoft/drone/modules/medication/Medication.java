@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rusoft.drone.modules.drone.Drone;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +23,7 @@ import lombok.Setter;
 public class Medication {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
@@ -30,5 +34,9 @@ public class Medication {
     private BigDecimal weight;
 
     private String image;
+
+    @ManyToOne
+    @JsonIgnore
+    private Drone drone;
 
 }
