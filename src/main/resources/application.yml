@@ -1,0 +1,27 @@
+spring:
+  data:
+    rest:
+      base-path: /api
+  application:
+    name: drone
+  datasource:
+    url: jdbc:h2:mem:dronedb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    # database-platform: org.hibernate.dialect.H2Dialect
+    # Used below to run data.sql after schema is created by hibernate
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        # default_schema: dronedb
+        # hbm2ddl:
+        #   auto: update
+        dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+
+  h2:
+    console:
+      enabled: true

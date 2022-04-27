@@ -1,0 +1,1 @@
+INSERT INTO DRONE (id, serial_number) VALUES (1, 'USA');
