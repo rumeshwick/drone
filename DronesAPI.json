@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "8792223b-b9d6-4d92-a6b9-1fa423d69d2f",
+		"name": "Drones",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Drones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/drones",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"drones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Drone's Battery Level",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/drones/check_battery_level?serialNumber=SE1234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"drones",
+						"check_battery_level"
+					],
+					"query": [
+						{
+							"key": "serialNumber",
+							"value": "SE1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Drone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"serialNumber\": \"MDD234234234SSD\",\n    \"model\": \"Lightweight\",\n    \"weightLimit\": 500,\n    \"batteryCapacity\": 24,\n    \"state\": \"LOADING\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/drones",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"drones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Load Medication",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"MEdfs54345_-DOne\",\n    \"code\": \"ASFF_45345\",\n    \"weight\": 500,\n    \"image\": \"https://thumbs.dreamstime.com/b/antibiotics-diagnosis-written-white-piece-paper-syringe-vaccine-drugs-62238514.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/drones/SE1234/load_medication/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"drones",
+						"SE1234",
+						"load_medication",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Medications",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"MED One\",\n    \"code\": \"MED1\",\n    \"weight\": 500,\n    \"image\": \"https://thumbs.dreamstime.com/b/antibiotics-diagnosis-written-white-piece-paper-syringe-vaccine-drugs-62238514.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/drones/SE1234/get_medications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"drones",
+						"SE1234",
+						"get_medications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Available Drones",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"MED One\",\n    \"code\": \"MED1\",\n    \"weight\": 500,\n    \"image\": \"https://thumbs.dreamstime.com/b/antibiotics-diagnosis-written-white-piece-paper-syringe-vaccine-drugs-62238514.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/drones/available",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"drones",
+						"available"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

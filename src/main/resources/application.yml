@@ -20,7 +20,7 @@ spring:
         #   auto: update
         dialect: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
 
   h2:
     console:
